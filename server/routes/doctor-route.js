@@ -1,10 +1,12 @@
 import express from 'express'
-import { doctorAppointments, doctorList, doctorLogin, completeAppointment, cancelAppointment, doctorDashboard, doctorProfile, updateProfile, changeAvailablity } from '../controllers/doctor-controller.js'
+import { doctorAppointments, doctorList, doctorLogin, completeAppointment, cancelAppointment, doctorDashboard, doctorProfile, updateProfile, changeAvailablity, doctorRegister } from '../controllers/doctor-controller.js'
 import authDoctor from '../middlewares/auth-doctor.js'
+import upload from '../middlewares/multer.js'
 
 const doctorRouter = express.Router()
 
 doctorRouter.get('/list', doctorList)
+doctorRouter.post('/register', upload.single('image'), doctorRegister);
 doctorRouter.post('/login', doctorLogin)
 doctorRouter.get('/appointments', authDoctor, doctorAppointments)
 doctorRouter.post('/complete-appointment', authDoctor, completeAppointment)

@@ -50,8 +50,8 @@ const AddDoctor = () => {
 
       const { data } = await axios.post(`${backendUrl}/api/admin/add-doctor`, formData, { headers: { token } })
 
+      toast.dismiss()
       if (data.success) {
-        toast.dismiss()
         toast.success(data.message)
         setDocImg(false)
         setName('')
@@ -66,7 +66,6 @@ const AddDoctor = () => {
         setAddress2('')
         setAbout('')
       } else {
-        toast.dismiss()
         toast.error(data.message)
       }
 
@@ -75,8 +74,18 @@ const AddDoctor = () => {
       toast.error(error.response.data.message)
       console.log('Error:', error);
     }
-
   }
+
+  const specialties = [
+  "Allergist", "Anesthesiologist", "Andrologist", "Cardiologist", "Dentist", "Dermatologist",
+  "Endocrinologist", "ENT Specialist", "Family Medicine", "Gastroenterologist", "General Physician",
+  "General Surgeon", "Geriatrician", "Gynecologist", "Hematologist", "Hepatologist", "Immunologist",
+  "Internal Medicine", "Neonatologist", "Nephrologist", "Neurologist", "Neurosurgeon", "Obstetrician",
+  "Oncologist", "Ophthalmologist", "Orthopedic Surgeon", "Pathologist", "Pediatrician",
+  "Physiotherapist", "Plastic Surgeon", "Psychiatrist", "Pulmonologist", "Radiologist",
+  "Rheumatologist", "Sexologist", "Urologist"
+].sort();
+
   return (
     <form onSubmit={onSubmitHandler} className='m-5 w-full'>
       <p className='mb-3 text-lg font-medium'>Add Doctor</p>
@@ -138,44 +147,18 @@ const AddDoctor = () => {
           <div className='w-full lg:flex-1 flex flex-col gap-4'>
             <div className='flex-1 flex flex-col gap-1'>
               <p>Speciality</p>
-              <select onChange={(e) => setSpeciality(e.target.value)} value={speciality} required className='border rounded px-3 py-2 ' name="speciality" id="speciality">
+              <select
+                onChange={(e) => setSpeciality(e.target.value)}
+                value={speciality}
+                required
+                className="border rounded px-3 py-2"
+                name="speciality"
+                id="speciality"
+              >
                 <option value="Not Speciality">--- Select Specialization ---</option>
-                <option value="Allergist">Allergist</option>
-                <option value="Anesthesiologist">Anesthesiologist</option>
-                <option value="Andrologist">Andrologist</option>
-                <option value="Cardiologist">Cardiologist</option>
-                <option value="Dentist">Dentist</option>
-                <option value="Dermatologist">Dermatologist</option>
-                <option value="Endocrinologist">Endocrinologist</option>
-                <option value="ENT Specialist">ENT Specialist (Otolaryngologist)</option>
-                <option value="Family Medicine">Family Medicine</option>
-                <option value="Gastroenterologist">Gastroenterologist</option>
-                <option value="General Physician">General Physician</option>
-                <option value="General Surgeon">General Surgeon</option>
-                <option value="Geriatrician">Geriatrician</option>
-                <option value="Gynecologist">Gynecologist</option>
-                <option value="Hematologist">Hematologist</option>
-                <option value="Hepatologist">Hepatologist</option>
-                <option value="Immunologist">Immunologist</option>
-                <option value="Internal Medicine">Internal Medicine</option>
-                <option value="Neonatologist">Neonatologist</option>
-                <option value="Nephrologist">Nephrologist</option>
-                <option value="Neurologist">Neurologist</option>
-                <option value="Neurosurgeon">Neurosurgeon</option>
-                <option value="Obstetrician">Obstetrician</option>
-                <option value="Oncologist">Oncologist</option>
-                <option value="Ophthalmologist">Ophthalmologist</option>
-                <option value="Orthopedic Surgeon">Orthopedic Surgeon</option>
-                <option value="Pediatrician">Pediatrician</option>
-                <option value="Pathologist">Pathologist</option>
-                <option value="Physiotherapist">Physiotherapist</option>
-                <option value="Plastic Surgeon">Plastic Surgeon</option>
-                <option value="Psychiatrist">Psychiatrist</option>
-                <option value="Pulmonologist">Pulmonologist</option>
-                <option value="Radiologist">Radiologist</option>
-                <option value="Rheumatologist">Rheumatologist</option>
-                <option value="Sexologist">Sexologist</option>
-                <option value="Urologist">Urologist</option>
+                {specialties.map((spec) => (
+                  <option key={spec} value={spec}>{spec}</option>
+                ))}
               </select>
             </div>
 

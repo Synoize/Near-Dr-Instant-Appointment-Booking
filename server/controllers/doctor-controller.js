@@ -1,6 +1,8 @@
+import validator from 'validator';
+import bcrypt from 'bcrypt';
+import { v2 as cloudinary } from 'cloudinary';
+import jwt from 'jsonwebtoken'
 import doctorModel from "../models/doctor-model.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import appointmentModel from "../models/appointment-model.js";
 
 // Change Doctors Availablity API : /api/doctor/change-availablity
@@ -53,6 +55,80 @@ const doctorLogin = async (req, res) => {
     } catch (error) {
         console.error("Login Error:", error.message);
         return res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+// Register Doctor : /api/doctor/register
+const doctorRegister = async (req, res) => {
+    try {
+        const { name, email, phone, password, speciality, degree, experience, about, fees, address } = req.body;
+        const imageFile = req.file;
+
+        // Validate required fields
+        if (!name || !email || !phone || !password || !speciality || !degree || !experience || !about || !fees || !address) {
+            return res.json({ success: false, message: "Missing required fields" });
+        }
+
+        // Validate email
+        if (!validator.isEmail(email)) {
+            return res.json({ success: false, message: "Enter a valid email address" });
+        }
+
+        // Validate password
+        if (password.length < 6) {
+            return res.json({ success: false, message: "Enter a strong password" });
+        }
+
+        // Validate phone
+        if (!phone || !/^\d{10}$/.test(phone)) {
+            return res.status(400).json({ success: false, message: "Enter a valid 10-digit phone number" });
+        }
+
+        // Check image file
+        if (!imageFile) {
+            return res.json({ success: false, message: "Profile image is required" });
+        }
+
+        // Prevent duplicate email
+        const existingDoctor = await doctorModel.findOne({ email });
+        if (existingDoctor) {
+            return res.json({ success: false, message: "Doctor already exists" });
+        }
+
+        // validating strong password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        // upload image to cloudinary
+        const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: "image" });
+        const imageUrl = imageUpload.secure_url;
+
+        const doctorData = {
+            name,
+            email,
+            phone,
+            image: imageUrl,
+            password: hashedPassword,
+            speciality,
+            degree,
+            experience,
+            about,
+            fees,
+            address: JSON.parse(address),
+            date: Date.now()
+        };
+
+        const newDoctor = new doctorModel(doctorData);
+        await newDoctor.save();
+
+        const token = jwt.sign({ id: newDoctor._id }, process.env.JWT_DOCTOR_SECRET_KEY, {
+            expiresIn: "1d",
+        });
+
+        res.json({ success: true, token, message: "Doctor registration successful" });
+    } catch (error) {
+        console.error(error);
+        res.json({ success: false, message: error.message });
     }
 };
 
@@ -184,4 +260,4 @@ const updateProfile = async (req, res) => {
     }
 }
 
-export { changeAvailablity, doctorList, doctorLogin, doctorAppointments, completeAppointment, cancelAppointment, doctorDashboard, doctorProfile, updateProfile }
+export { changeAvailablity, doctorList, doctorRegister, doctorLogin, doctorAppointments, completeAppointment, cancelAppointment, doctorDashboard, doctorProfile, updateProfile }

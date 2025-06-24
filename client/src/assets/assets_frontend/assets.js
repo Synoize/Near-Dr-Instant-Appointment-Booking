@@ -59,31 +59,45 @@ export const assets = {
 }
 
 export const specialityData = [
-    {
-        speciality: 'General physician',
-        image: General_physician
-    },
-    {
-        speciality: 'Gynecologist',
-        image: Gynecologist
-    },
-    {
-        speciality: 'Dermatologist',
-        image: Dermatologist
-    },
-    {
-        speciality: 'Pediatricians',
-        image: Pediatricians
-    },
-    {
-        speciality: 'Neurologist',
-        image: Neurologist
-    },
-    {
-        speciality: 'Gastroenterologist',
-        image: Gastroenterologist
-    },
-]
+  { speciality: 'Allergist', image: defaultImage },
+  { speciality: 'Anesthesiologist', image: defaultImage },
+  { speciality: 'Andrologist', image: defaultImage },
+  { speciality: 'Cardiologist', image: defaultImage },
+  { speciality: 'Dentist', image: defaultImage },
+  { speciality: 'Dermatologist', image: Dermatologist },
+  { speciality: 'Endocrinologist', image: defaultImage },
+  { speciality: 'ENT Specialist', image: defaultImage },
+  { speciality: 'Family Medicine', image: defaultImage },
+  { speciality: 'Gastroenterologist', image: Gastroenterologist },
+  { speciality: 'General physician', image: General_physician },
+  { speciality: 'General Surgeon', image: defaultImage },
+  { speciality: 'Geriatrician', image: defaultImage },
+  { speciality: 'Gynecologist', image: Gynecologist },
+  { speciality: 'Hematologist', image: defaultImage },
+  { speciality: 'Hepatologist', image: defaultImage },
+  { speciality: 'Immunologist', image: defaultImage },
+  { speciality: 'Internal Medicine', image: defaultImage },
+  { speciality: 'Neonatologist', image: defaultImage },
+  { speciality: 'Nephrologist', image: defaultImage },
+  { speciality: 'Neurologist', image: Neurologist },
+  { speciality: 'Neurosurgeon', image: defaultImage },
+  { speciality: 'Obstetrician', image: defaultImage },
+  { speciality: 'Oncologist', image: defaultImage },
+  { speciality: 'Ophthalmologist', image: defaultImage },
+  { speciality: 'Orthopedic Surgeon', image: defaultImage },
+  { speciality: 'Pathologist', image: defaultImage },
+  { speciality: 'Pediatrician', image: defaultImage },
+  { speciality: 'Pediatricians', image: Pediatricians }, // Keep only one if duplicate
+  { speciality: 'Physiotherapist', image: defaultImage },
+  { speciality: 'Plastic Surgeon', image: defaultImage },
+  { speciality: 'Psychiatrist', image: defaultImage },
+  { speciality: 'Pulmonologist', image: defaultImage },
+  { speciality: 'Radiologist', image: defaultImage },
+  { speciality: 'Rheumatologist', image: defaultImage },
+  { speciality: 'Sexologist', image: defaultImage },
+  { speciality: 'Urologist', image: defaultImage },
+];
+
 
 export const doctors = [
     {
