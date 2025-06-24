@@ -7,7 +7,7 @@ const Doctors = () => {
   const [filterDoc, setFilterDoc] = useState([]);
   const [showFilter, setShowFilter] = useState(false)
   const navigate = useNavigate();
-  const { doctors } = useContext(AppContext);
+  const { doctors, getDoctorsData } = useContext(AppContext);
 
   const applyFilter = () => {
     if (speciality) {
@@ -20,6 +20,10 @@ const Doctors = () => {
   useEffect(() => {
     applyFilter();
   }, [doctors, speciality])
+
+  useEffect(() => {
+    getDoctorsData();
+  }, [])
 
  const specialties = [
   "General Physician",

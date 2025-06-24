@@ -13,7 +13,12 @@ import userRouter from './routes/user-route.js';
 const app = express();
 const PORT = process.env.PORT || 4000
 const corsOptions = {
-    origin: ["https://neardr.onrender.com", "https://neardr-admin.onrender.com"],
+    origin: [
+        "http://localhost:5174",
+        "http://localhost:5173",
+        "https://neardr.onrender.com",
+        "https://neardr-admin.onrender.com"
+    ],
     methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
     credentials: true,
 };
@@ -42,5 +47,5 @@ const start = async () => {
     } catch (error) {
         console.log(error);
     }
-}; 
+};
 start();
