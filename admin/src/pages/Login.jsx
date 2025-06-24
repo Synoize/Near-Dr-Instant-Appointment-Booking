@@ -252,7 +252,7 @@ const Login = () => {
 
               <div>
                 <p className='mt-4 mb-2'>About</p>
-                <textarea onChange={(e) => setAbout(e.target.value)} value={about} className='w-full px-4 pt-2 border rounded' name="text" placeholder='Write about doctor' rows={5} required></textarea>
+                <textarea onChange={(e) => setAbout(e.target.value)} value={about} className='w-full px-4 pt-2 border rounded' name="text" placeholder='Write about doctor... #fever #fracture #specialization ' rows={5} required></textarea>
               </div>
 
               <button type='submit' className='bg-primary px-10 py-3 mt-4 text-white rounded-full'>Sign Up</button>
