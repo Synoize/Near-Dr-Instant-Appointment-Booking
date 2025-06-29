@@ -14,7 +14,7 @@ const AppContextProvider = (props) => {
     const [userData, setUserData] = useState(false)
     const [doctors, setDoctors] = useState([])
 
-    const [keyword, setKeyword] = useState('Cardiologist');
+    const [keyword, setKeyword] = useState('');
     const [searchDoctors, setSearchDoctors] = useState([]);
 
     const handleSearchDoctors = async () => {
