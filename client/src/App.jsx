@@ -11,6 +11,7 @@ import Login from './pages/Login'
 import Appointment from './pages/Appointment'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
+import SearchDoctorList from './pages/SearchDoctorList'
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path={'/doctors/:speciality'} element={<Doctors />} />
         <Route path={'/about'} element={<About />} />
         <Route path={'/contact'} element={<Contact />} />
+        <Route path={'/search'} element={<SearchDoctorList />} />
         <Route path={'/login'} element={<Login />} />
         <Route path={'/my-profile'} element={<MyProfile />} />
         <Route path={'/my-appointments'} element={<MyAppointments />} />

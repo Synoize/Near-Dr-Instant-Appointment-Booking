@@ -308,4 +308,40 @@ const verifyRazorpay = async (req, res) => {
     }
 }
 
-export { userRegister, userLogin, getUserProfile, updateUserProfile, bookAppointment, userAppointments, cancelAppointment, paymentRazorpay, verifyRazorpay }
+// Search doctor on the basis of speciality or description : /api/user/search-doctor
+const searchDoctor = async (req, res) => {
+    try {
+        const { keyword } = req.query;
+
+        if (!keyword) {
+            return res.status(400).json({
+                success: false,
+                message: 'Search keyword is required.',
+            });
+        }
+
+        // Case-insensitive search in speciality or description fields
+        const doctors = await doctorModel.find({
+            $or: [
+                { speciality: { $regex: keyword, $options: 'i' } },
+                { about: { $regex: keyword, $options: 'i' } },
+                { name: { $regex: keyword, $options: 'i' } },
+                { degree: { $regex: keyword, $options: 'i' } },
+                { experience: { $regex: keyword, $options: 'i' } },
+            ]
+        });
+
+        res.status(200).json({
+            success: true,
+            doctors
+        });
+    } catch (error) {
+        console.error('Search Doctor Error:', error);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+export { userRegister, userLogin, getUserProfile, updateUserProfile, bookAppointment, userAppointments, cancelAppointment, paymentRazorpay, verifyRazorpay, searchDoctor }

@@ -14,6 +14,34 @@ const AppContextProvider = (props) => {
     const [userData, setUserData] = useState(false)
     const [doctors, setDoctors] = useState([])
 
+    const [keyword, setKeyword] = useState('Cardiologist');
+    const [searchDoctors, setSearchDoctors] = useState([]);
+
+    const handleSearchDoctors = async () => {
+        if (!keyword.trim()) {
+            toast.error('Please enter a search keyword.');
+            return;
+        }
+
+        localStorage.setItem('searchKeyword', keyword);
+
+        try {
+            const { data } = await axios.get(`${backendUrl}/api/user/search-doctor`, {
+                params: { keyword }
+            });
+
+            if (data.success) {
+                setSearchDoctors(data.doctors);
+                setKeyword('');
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error(error.response?.data?.message || error.message);
+        }
+    };
+
     // Get Doctors Data
     const getDoctorsData = async () => {
         try {
@@ -64,6 +92,7 @@ const AppContextProvider = (props) => {
         doctors, setDoctors, getDoctorsData,
         token, setToken,
         userData, setUserData, getUserProfileData,
+        keyword, setKeyword, searchDoctors, setSearchDoctors, handleSearchDoctors,
     }
 
     return (
