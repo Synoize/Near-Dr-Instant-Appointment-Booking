@@ -17,7 +17,9 @@ const corsOptions = {
         "http://localhost:5174",
         "http://localhost:5173",
         "https://neardr.onrender.com",
-        "https://neardr-admin.onrender.com"
+        "https://neardr-admin.onrender.com",
+        "https://neardr.vercel.app",
+        "https://neardr-admin.vercel.app",
     ],
     methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
     credentials: true,
