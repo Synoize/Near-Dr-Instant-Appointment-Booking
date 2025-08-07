@@ -8,7 +8,7 @@ import SearchDoctors from '../components/SearchDoctors'
 const Home = () => {
   return (
     <div>
-      <div className="sm:p-4 pb-2 max-w-md mx-auto">
+      <div className="sm:p-4 pb-2 max-w-xl mx-auto">
         <SearchDoctors />
       </div>
       <Header />
