@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { specialityData } from '../assets/assets_frontend/assets'
+import { assets, specialityData } from '../assets/assets_frontend/assets'
 
 const SpecialityMenu = () => {
     return (
@@ -16,6 +16,10 @@ const SpecialityMenu = () => {
                         </Link>
                     ))
                 }
+                <Link to="/doctors" className='flex flex-col items-center text-xs cursor-pointer flex-shrink-0 hover:translate-x-[10px] transition-all duration-500'>
+                     <img className='w-4 m-6 mx-4 md:my-10 -rotate-90' src={assets.dropdown_icon} alt="" />
+                    <p>more</p>
+                </Link>
             </div>
         </div>
     )

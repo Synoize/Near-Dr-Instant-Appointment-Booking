@@ -25,12 +25,15 @@ const AppContextProvider = (props) => {
 
         localStorage.setItem('searchKeyword', keyword);
 
+        toast.loading("Finding...");
+
         try {
             const { data } = await axios.get(`${backendUrl}/api/user/search-doctor`, {
                 params: { keyword }
             });
 
             if (data.success) {
+                toast.dismiss();
                 setSearchDoctors(data.doctors);
                 setKeyword('');
             } else {
